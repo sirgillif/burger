@@ -9,23 +9,24 @@ router.get('/', function (req, res) {
 router.get('/burger', function (req, res) {
 	burger.all(function (data) {
 		var hbsObject = { burgers: data };
-		console.log(hbsObject);
+		//console.log(hbsObject);
 		res.render('index', hbsObject);
 	});
 });
 
 router.post('/burger/create', function (req, res) {
-	burger.create(['burger_name'], [req.body.burger_name], function () {
+	//console.log(req.body);
+	burger.create('burger_name', [req.body.name], function () {
 		res.redirect('/burger');
 	});
 });
 
 router.put('/burger/update/:id', function (req, res) {
 	var condition = 'id = ' + req.params.id;
-
+	console.log(req.body);
 	console.log('condition', condition);
 
-	burger.update({ devoured: req.body.sleepy }, condition, function () {
+	burger.update({ devoured: req.body.devoured }, condition, function () {
 		res.redirect('/burger');
 	});
 });
